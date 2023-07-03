@@ -8,5 +8,6 @@ target 'RMDiary' do
   # Pods for RMDiary
 pod 'SwiftLint'
 pod 'SnapKit'
+pod 'RealmSwift'
 
 end
