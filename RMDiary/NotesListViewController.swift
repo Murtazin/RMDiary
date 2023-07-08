@@ -9,9 +9,14 @@ import SnapKit
 
 final class NotesListViewController: UIViewController {
   
+  // MARK: - Private properties
+  
+  private var totalSquares = [Date]()
+  private var selectedDate = Date()
+  
   // MARK: - UI
   
-  private lazy var previousMonthButton: UIButton = {
+  private lazy var previousWeekButton: UIButton = {
     let button = UIButton()
     let image = UIImage(named: "arrow-back-icon")
     button.setImage(image, for: .normal)
@@ -20,12 +25,11 @@ final class NotesListViewController: UIViewController {
   
   private lazy var monthLabel: UILabel = {
     let label = UILabel()
-    label.text = "Август 2023"
     label.font = .systemFont(ofSize: 24, weight: .bold)
     return label
   }()
   
-  private lazy var nextMonthButton: UIButton = {
+  private lazy var nextWeekButton: UIButton = {
     let button = UIButton()
     let image = UIImage(named: "arrow-ahead-icon")
     button.setImage(image, for: .normal)
@@ -35,9 +39,9 @@ final class NotesListViewController: UIViewController {
   private lazy var daysOfWeekTitlesStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
-    stackView.distribution = .equalSpacing
+    stackView.distribution = .equalCentering
     stackView.isLayoutMarginsRelativeArrangement = true
-    stackView.layoutMargins = .init(top: 0, left: 4, bottom: 0, right: 4)
+    stackView.layoutMargins = .init(top: 0, left: 16, bottom: 0, right: 16)
     return stackView
   }()
   
@@ -62,6 +66,7 @@ final class NotesListViewController: UIViewController {
     
     setUpUI()
     setUpConstraints()
+    setUpCurrentWeek()
   }
 }
 
@@ -71,21 +76,25 @@ private extension NotesListViewController {
   
   func setUpUI() {
     
-    view.addSubview(previousMonthButton)
-    view.addSubview(nextMonthButton)
+    view.addSubview(previousWeekButton)
+    view.addSubview(nextWeekButton)
     view.addSubview(monthLabel)
     view.addSubview(daysOfWeekTitlesStackView)
     view.addSubview(daysCollectionView)
     view.addSubview(notesTableView)
-
-    previousMonthButton.translatesAutoresizingMaskIntoConstraints = false
-    nextMonthButton.translatesAutoresizingMaskIntoConstraints = false
+    
+    previousWeekButton.translatesAutoresizingMaskIntoConstraints = false
+    nextWeekButton.translatesAutoresizingMaskIntoConstraints = false
     monthLabel.translatesAutoresizingMaskIntoConstraints = false
     daysOfWeekTitlesStackView.translatesAutoresizingMaskIntoConstraints = false
     daysCollectionView.translatesAutoresizingMaskIntoConstraints = false
     notesTableView.translatesAutoresizingMaskIntoConstraints = false
     
+    previousWeekButton.addTarget(self, action: #selector(previousWeekButtonDidTap), for: .touchUpInside)
+    nextWeekButton.addTarget(self, action: #selector(nextWeekButtonDidTap), for: .touchUpInside)
+    
     setUpDaysOfWeekTitlesStackView()
+    setUpDaysCollectionView()
   }
   
   func setUpConstraints() {
@@ -93,14 +102,14 @@ private extension NotesListViewController {
     let buttonWidthHeightConstant: CGFloat = 30
     let collectionViewHeightConstant: CGFloat = 100
     
-    previousMonthButton.snp.makeConstraints {
+    previousWeekButton.snp.makeConstraints {
       $0.width.equalTo(buttonWidthHeightConstant)
       $0.height.equalTo(buttonWidthHeightConstant)
       $0.top.equalTo(view.safeAreaLayoutGuide).inset(16)
       $0.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
     }
     
-    nextMonthButton.snp.makeConstraints {
+    nextWeekButton.snp.makeConstraints {
       $0.width.equalTo(buttonWidthHeightConstant)
       $0.height.equalTo(buttonWidthHeightConstant)
       $0.top.equalTo(view.safeAreaLayoutGuide).inset(16)
@@ -135,7 +144,7 @@ private extension NotesListViewController {
   
   func setUpDaysOfWeekTitlesStackView() {
     
-    let daysOfWeekTitles = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
+    let daysOfWeekTitles = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
     
     for title in daysOfWeekTitles {
       let label = UILabel()
@@ -145,18 +154,75 @@ private extension NotesListViewController {
       daysOfWeekTitlesStackView.addArrangedSubview(label)
     }
   }
+  
+  func setUpDaysCollectionView() {
+    
+    daysCollectionView.dataSource = self
+    daysCollectionView.delegate = self
+    
+    daysCollectionView.register(CalendarCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier)
+  }
+  
+  func setUpCurrentWeek() {
+    
+    totalSquares.removeAll()
+    
+    var current = CalendarHelper.shared.sundayForDate(date: selectedDate)
+    let nextSunday = CalendarHelper.shared.addDays(date: current, days: 7)
+
+    while current < nextSunday {
+      totalSquares.append(current)
+      current = CalendarHelper.shared.addDays(date: current, days: 1)
+    }
+
+    monthLabel.text = CalendarHelper.shared.monthString(date: selectedDate) + " " + CalendarHelper.shared.yearString(date: selectedDate)
+    
+    daysCollectionView.reloadData()
+  }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: -
 
-extension NotesListViewController: UICollectionViewDataSource {
+@objc private extension NotesListViewController {
+  
+  func previousWeekButtonDidTap(sender: UIButton) {
+    
+    selectedDate = CalendarHelper.shared.addDays(date: selectedDate, days: -7)
+    setUpCurrentWeek()
+  }
+  
+  func nextWeekButtonDidTap(sender: UIButton) {
+    
+    selectedDate = CalendarHelper.shared.addDays(date: selectedDate, days: 7)
+    setUpCurrentWeek()
+  }
+}
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
+extension NotesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 7
+    
+    return totalSquares.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return UICollectionViewCell()
+    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier,
+                                                        for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
+    let date = totalSquares[indexPath.item]
+    let text = String(CalendarHelper.shared.dayOfMonth(date: date))
+    cell.backgroundColor = date == selectedDate ? .systemGreen : UIColor(named: "viewBackgroundColor")
+    cell.configure(text: text)
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    selectedDate = totalSquares[indexPath.item]
+    collectionView.reloadData()
   }
 }
 
@@ -165,6 +231,12 @@ extension NotesListViewController: UICollectionViewDataSource {
 extension NotesListViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
     return .init(width: collectionView.frame.width / 7, height: collectionView.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    
+    return .zero
   }
 }

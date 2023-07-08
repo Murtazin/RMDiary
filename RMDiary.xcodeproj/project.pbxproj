@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		71977091A193586EBAC44C2C /* Pods_RMDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19765FD2BCD89A6EC9513021 /* Pods_RMDiary.framework */; };
+		A21CB6D92A57579C0042BD78 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */; };
+		A21CB6DB2A57FD640042BD78 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */; };
 		A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA7E2A533B5D007035BA /* AppDelegate.swift */; };
 		A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA822A533B5D007035BA /* NotesListViewController.swift */; };
 		A293CA862A533B5D007035BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A293CA842A533B5D007035BA /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* Begin PBXFileReference section */
 		0E63027381FC74E205F194C9 /* Pods-RMDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMDiary.debug.xcconfig"; path = "Target Support Files/Pods-RMDiary/Pods-RMDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		19765FD2BCD89A6EC9513021 /* Pods_RMDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RMDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		A293CA7B2A533B5D007035BA /* RMDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A293CA7E2A533B5D007035BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A293CA822A533B5D007035BA /* NotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 			children = (
 				A293CA7E2A533B5D007035BA /* AppDelegate.swift */,
 				A293CA822A533B5D007035BA /* NotesListViewController.swift */,
+				A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */,
+				A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */,
 				A293CA842A533B5D007035BA /* Main.storyboard */,
 				A293CA872A533B5D007035BA /* Assets.xcassets */,
 				A293CA892A533B5D007035BA /* LaunchScreen.storyboard */,
@@ -221,6 +227,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A21CB6D92A57579C0042BD78 /* CalendarCollectionViewCell.swift in Sources */,
+				A21CB6DB2A57FD640042BD78 /* CalendarHelper.swift in Sources */,
 				A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */,
 				A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */,
 			);
