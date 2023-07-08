@@ -182,7 +182,7 @@ private extension NotesListViewController {
   }
 }
 
-// MARK: -
+// MARK: - Objc functions
 
 @objc private extension NotesListViewController {
   
