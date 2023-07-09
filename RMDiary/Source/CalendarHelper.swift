@@ -9,6 +9,8 @@ import Foundation
 
 final class CalendarHelper {
   
+  // MARK: - Internal properties
+  
   static let shared = CalendarHelper()
   
   // MARK: - Private properties
@@ -40,6 +42,12 @@ final class CalendarHelper {
     return day
   }
   
+  func hourFromDate(date: Date) -> Int {
+    let components = calendar.dateComponents([.hour], from: date)
+    guard let hour = components.hour else { return 0 }
+    return hour
+  }
+  
   func addDays(date: Date, days: Int) -> Date {
     guard let date = calendar.date(byAdding: .day, value: days, to: date) else { return Date() }
     return date
@@ -57,5 +65,13 @@ final class CalendarHelper {
       current = addDays(date: current, days: -1)
     }
     return current
+  }
+  
+  func isNoteDate(_ noteDate: Date, isSameDateAs date: Date, hour: Int) -> Bool {
+    if calendar.isDate(noteDate, inSameDayAs: date) {
+      let noteHour = CalendarHelper.shared.hourFromDate(date: noteDate)
+      if noteHour == hour { return true }
+    }
+    return false
   }
 }
