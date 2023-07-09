@@ -13,6 +13,16 @@ final class NotesListViewController: UIViewController {
   
   private var totalSquares = [Date]()
   private var selectedDate = Date()
+  private var hours = [Int]()
+  private var notes: [Note] = [
+    Note(id: 0,
+         startDate: Date(timeIntervalSince1970: 1687915763),
+         finishDate: Date(timeIntervalSince1970: 1687915764),
+         name: "Помыть посуду", description: ""),
+    Note(id: 0,
+         startDate: Date(timeIntervalSince1970: 1688915763),
+         finishDate: Date(timeIntervalSince1970: 1688915764),
+         name: "Постирать вещи", description: "")]
   
   // MARK: - UI
   
@@ -67,6 +77,7 @@ final class NotesListViewController: UIViewController {
     setUpUI()
     setUpConstraints()
     setUpCurrentWeek()
+    initializeHours()
   }
 }
 
@@ -95,6 +106,7 @@ private extension NotesListViewController {
     
     setUpDaysOfWeekTitlesStackView()
     setUpDaysCollectionView()
+    setUpNotesTableView()
   }
   
   func setUpConstraints() {
@@ -164,6 +176,15 @@ private extension NotesListViewController {
                                 forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier)
   }
   
+  func setUpNotesTableView() {
+    
+    notesTableView.dataSource = self
+    notesTableView.delegate = self
+    
+    notesTableView.register(NoteTableViewCell.self,
+                            forCellReuseIdentifier: NoteTableViewCell.reuseIdentifier)
+  }
+  
   func setUpCurrentWeek() {
     
     totalSquares.removeAll()
@@ -176,9 +197,17 @@ private extension NotesListViewController {
       current = CalendarHelper.shared.addDays(date: current, days: 1)
     }
 
-    monthLabel.text = CalendarHelper.shared.monthString(date: selectedDate) + " " + CalendarHelper.shared.yearString(date: selectedDate)
+    monthLabel.text = CalendarHelper.shared.monthString(date: selectedDate)
+    + " " + CalendarHelper.shared.yearString(date: selectedDate)
     
     daysCollectionView.reloadData()
+  }
+  
+  func initializeHours() {
+    
+    for hour in 0...23 {
+      hours.append(hour)
+    }
   }
 }
 
@@ -223,6 +252,7 @@ extension NotesListViewController: UICollectionViewDataSource, UICollectionViewD
     
     selectedDate = totalSquares[indexPath.item]
     collectionView.reloadData()
+    notesTableView.reloadData()
   }
 }
 
@@ -238,5 +268,25 @@ extension NotesListViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     
     return .zero
+  }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension NotesListViewController: UITableViewDataSource, UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return hours.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.reuseIdentifier,
+                                                   for: indexPath) as? NoteTableViewCell else { return UITableViewCell() }
+    let hour = hours[indexPath.row]
+    let lastHour = indexPath.row == hours.count - 1 ? 0 : hours[indexPath.row + 1]
+    let note = NoteService.shared.getObjectFromListByDateAndTime(list: notes, date: selectedDate, time: hour)
+    let time = TimeHelper.shared.formatToString(firstHour: hour, lastHour: lastHour)
+    cell.configure(time: time, name: note?.name)
+    return cell
   }
 }

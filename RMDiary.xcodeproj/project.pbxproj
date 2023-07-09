@@ -11,6 +11,8 @@
 		A21CB6D92A57579C0042BD78 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */; };
 		A21CB6DB2A57FD640042BD78 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */; };
 		A263DDE22A59DAB500FD7997 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDE12A59DAB500FD7997 /* Note.swift */; };
+		A263DDE82A5AAE7700FD7997 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */; };
+		A263DDEC2A5AC8F900FD7997 /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */; };
 		A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA7E2A533B5D007035BA /* AppDelegate.swift */; };
 		A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA822A533B5D007035BA /* NotesListViewController.swift */; };
 		A293CA882A533B5D007035BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A293CA872A533B5D007035BA /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		A263DDE12A59DAB500FD7997 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
 		A293CA7B2A533B5D007035BA /* RMDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A293CA7E2A533B5D007035BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A293CA822A533B5D007035BA /* NotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */,
 				A263DDE12A59DAB500FD7997 /* Note.swift */,
 				A293CA822A533B5D007035BA /* NotesListViewController.swift */,
+				A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */,
+				A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -259,10 +265,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A263DDE22A59DAB500FD7997 /* Note.swift in Sources */,
+				A263DDEC2A5AC8F900FD7997 /* TimeHelper.swift in Sources */,
 				A21CB6D92A57579C0042BD78 /* CalendarCollectionViewCell.swift in Sources */,
 				A21CB6DB2A57FD640042BD78 /* CalendarHelper.swift in Sources */,
 				A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */,
 				A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */,
+				A263DDE82A5AAE7700FD7997 /* NoteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +412,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S75KQYF72G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RMDiary/Info.plist;
+				INFOPLIST_FILE = RMDiary/SupportingFIles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -435,7 +443,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S75KQYF72G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RMDiary/Info.plist;
+				INFOPLIST_FILE = RMDiary/SupportingFIles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
