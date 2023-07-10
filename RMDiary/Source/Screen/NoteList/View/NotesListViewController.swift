@@ -7,22 +7,20 @@
 
 import SnapKit
 
-final class NotesListViewController: UIViewController {
+protocol INoteListInput: AnyObject { }
+
+final class NoteListViewController: UIViewController {
+  
+  // MARK: - Internal properties
+  
+  var output: INoteListOutput
   
   // MARK: - Private properties
   
   private var totalSquares = [Date]()
   private var selectedDate = Date()
   private var hours = [Int]()
-  private var notes: [Note] = [
-    Note(id: 0,
-         startDate: Date(timeIntervalSince1970: 1687915763),
-         finishDate: Date(timeIntervalSince1970: 1687915764),
-         name: "Помыть посуду", description: ""),
-    Note(id: 0,
-         startDate: Date(timeIntervalSince1970: 1688915763),
-         finishDate: Date(timeIntervalSince1970: 1688915764),
-         name: "Постирать вещи", description: "")]
+  private var notes: [Note] = []
   
   // MARK: - UI
   
@@ -78,12 +76,25 @@ final class NotesListViewController: UIViewController {
     setUpConstraints()
     setUpCurrentWeek()
     initializeHours()
+    fetchNoteList()
+  }
+  
+  // MARK: - Initializers
+  
+  init(output: INoteListOutput) {
+    self.output = output
+    
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
 // MARK: - Private functions
 
-private extension NotesListViewController {
+private extension NoteListViewController {
   
   func setUpUI() {
     
@@ -209,11 +220,24 @@ private extension NotesListViewController {
       hours.append(hour)
     }
   }
+  
+  func fetchNoteList() {
+    
+    output.fetchNoteList { result in
+      switch result {
+      case .success(let notes):
+        self.notes = notes
+        print(notes)
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
 }
 
 // MARK: - Objc functions
 
-@objc private extension NotesListViewController {
+@objc private extension NoteListViewController {
   
   func previousWeekButtonDidTap(sender: UIButton) {
     
@@ -230,7 +254,7 @@ private extension NotesListViewController {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-extension NotesListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension NoteListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
@@ -258,7 +282,7 @@ extension NotesListViewController: UICollectionViewDataSource, UICollectionViewD
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension NotesListViewController: UICollectionViewDelegateFlowLayout {
+extension NoteListViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
@@ -273,7 +297,7 @@ extension NotesListViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension NotesListViewController: UITableViewDataSource, UITableViewDelegate {
+extension NoteListViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return hours.count
