@@ -13,6 +13,10 @@
 		A263DDE22A59DAB500FD7997 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDE12A59DAB500FD7997 /* Note.swift */; };
 		A263DDE82A5AAE7700FD7997 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */; };
 		A263DDEC2A5AC8F900FD7997 /* TimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */; };
+		A263DDEE2A5B238200FD7997 /* notes.json in Resources */ = {isa = PBXBuildFile; fileRef = A263DDED2A5B238200FD7997 /* notes.json */; };
+		A263DDF02A5B244F00FD7997 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDEF2A5B244F00FD7997 /* DataService.swift */; };
+		A263DDFC2A5C119800FD7997 /* NoteListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDFB2A5C119800FD7997 /* NoteListPresenter.swift */; };
+		A263DDFE2A5C136A00FD7997 /* NoteListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263DDFD2A5C136A00FD7997 /* NoteListModuleBuilder.swift */; };
 		A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA7E2A533B5D007035BA /* AppDelegate.swift */; };
 		A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A293CA822A533B5D007035BA /* NotesListViewController.swift */; };
 		A293CA882A533B5D007035BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A293CA872A533B5D007035BA /* Assets.xcassets */; };
@@ -27,6 +31,10 @@
 		A263DDE12A59DAB500FD7997 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelper.swift; sourceTree = "<group>"; };
+		A263DDED2A5B238200FD7997 /* notes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = notes.json; path = RMDiary/Resources/notes.json; sourceTree = SOURCE_ROOT; };
+		A263DDEF2A5B244F00FD7997 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		A263DDFB2A5C119800FD7997 /* NoteListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListPresenter.swift; sourceTree = "<group>"; };
+		A263DDFD2A5C136A00FD7997 /* NoteListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListModuleBuilder.swift; sourceTree = "<group>"; };
 		A293CA7B2A533B5D007035BA /* RMDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A293CA7E2A533B5D007035BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A293CA822A533B5D007035BA /* NotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +84,7 @@
 		A263DDE52A59DAEE00FD7997 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A263DDED2A5B238200FD7997 /* notes.json */,
 				A293CA872A533B5D007035BA /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -84,14 +93,97 @@
 		A263DDE62A59DAF900FD7997 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */,
-				A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */,
-				A263DDE12A59DAB500FD7997 /* Note.swift */,
-				A293CA822A533B5D007035BA /* NotesListViewController.swift */,
-				A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */,
-				A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */,
+				A263DDF42A5C104F00FD7997 /* Model */,
+				A263DDF32A5C103600FD7997 /* Screen */,
+				A263DDF22A5C102600FD7997 /* Helper */,
+				A263DDF12A5C101800FD7997 /* Service */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		A263DDF12A5C101800FD7997 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDEF2A5B244F00FD7997 /* DataService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A263DDF22A5C102600FD7997 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A21CB6DA2A57FD640042BD78 /* CalendarHelper.swift */,
+				A263DDEB2A5AC8F900FD7997 /* TimeHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		A263DDF32A5C103600FD7997 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDF62A5C106500FD7997 /* NoteDetail */,
+				A263DDF52A5C105E00FD7997 /* NoteList */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		A263DDF42A5C104F00FD7997 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDE12A59DAB500FD7997 /* Note.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A263DDF52A5C105E00FD7997 /* NoteList */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDFA2A5C10A700FD7997 /* ModuleBuilder */,
+				A263DDF82A5C108D00FD7997 /* Presenter */,
+				A263DDF72A5C107700FD7997 /* View */,
+			);
+			path = NoteList;
+			sourceTree = "<group>";
+		};
+		A263DDF62A5C106500FD7997 /* NoteDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NoteDetail;
+			sourceTree = "<group>";
+		};
+		A263DDF72A5C107700FD7997 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDF92A5C109900FD7997 /* Cell */,
+				A293CA822A533B5D007035BA /* NotesListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A263DDF82A5C108D00FD7997 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDFB2A5C119800FD7997 /* NoteListPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		A263DDF92A5C109900FD7997 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A21CB6D82A57579C0042BD78 /* CalendarCollectionViewCell.swift */,
+				A263DDE72A5AAE7700FD7997 /* NoteTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A263DDFA2A5C10A700FD7997 /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				A263DDFD2A5C136A00FD7997 /* NoteListModuleBuilder.swift */,
+			);
+			path = ModuleBuilder;
 			sourceTree = "<group>";
 		};
 		A265AE1973EF997A36A49434 /* Pods */ = {
@@ -195,6 +287,7 @@
 			files = (
 				A293CA8B2A533B5D007035BA /* LaunchScreen.storyboard in Resources */,
 				A293CA882A533B5D007035BA /* Assets.xcassets in Resources */,
+				A263DDEE2A5B238200FD7997 /* notes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,8 +362,11 @@
 				A21CB6D92A57579C0042BD78 /* CalendarCollectionViewCell.swift in Sources */,
 				A21CB6DB2A57FD640042BD78 /* CalendarHelper.swift in Sources */,
 				A293CA832A533B5D007035BA /* NotesListViewController.swift in Sources */,
+				A263DDFE2A5C136A00FD7997 /* NoteListModuleBuilder.swift in Sources */,
+				A263DDFC2A5C119800FD7997 /* NoteListPresenter.swift in Sources */,
 				A293CA7F2A533B5D007035BA /* AppDelegate.swift in Sources */,
 				A263DDE82A5AAE7700FD7997 /* NoteTableViewCell.swift in Sources */,
+				A263DDF02A5B244F00FD7997 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

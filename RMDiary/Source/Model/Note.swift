@@ -28,7 +28,7 @@ final class NoteService {
   }
 }
 
-struct Note {
+struct Note: Codable {
   
   // MARK: - Internal propties
   
@@ -37,4 +37,14 @@ struct Note {
   let finishDate: Date
   let name: String
   let description: String
+  
+  // MARK: - Private enums
+  
+  private enum CodingKeys: String, CodingKey {
+    case id = "id"
+    case startDate = "date_start"
+    case finishDate = "date_finish"
+    case name = "name"
+    case description = "description"
+  }
 }
