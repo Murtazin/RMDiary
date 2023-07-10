@@ -11,11 +11,9 @@ protocol INoteListInput: AnyObject { }
 
 final class NoteListViewController: UIViewController {
   
-  // MARK: - Internal properties
-  
-  var output: INoteListOutput
-  
   // MARK: - Private properties
+  
+  private let output: INoteListOutput
   
   private var totalSquares = [Date]()
   private var selectedDate = Date()
@@ -309,8 +307,25 @@ extension NoteListViewController: UITableViewDataSource, UITableViewDelegate {
     let hour = hours[indexPath.row]
     let lastHour = indexPath.row == hours.count - 1 ? 0 : hours[indexPath.row + 1]
     let note = NoteService.shared.getObjectFromListByDateAndTime(list: notes, date: selectedDate, time: hour)
-    let time = TimeHelper.shared.formatToString(firstHour: hour, lastHour: lastHour)
+    let time = TimeHelper.shared.formatIntToString(firstHour: hour, lastHour: lastHour)
     cell.configure(time: time, name: note?.name)
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let hour = hours[indexPath.row]
+    let lastHour = indexPath.row == hours.count - 1 ? 0 : hours[indexPath.row + 1]
+    let time = TimeHelper.shared.formatIntToString(firstHour: hour, lastHour: lastHour)
+    let note = NoteService.shared.getObjectFromListByDateAndTime(list: notes, date: selectedDate, time: hour)
+    
+    if let note = note {
+      
+      let name = note.name
+      let description = note.description
+      let detailVC = NoteDetailViewController(name: name, description: description, time: time)
+      
+      navigationController?.pushViewController(detailVC, animated: true)
+    }
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }

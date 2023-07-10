@@ -13,13 +13,11 @@ protocol INoteListOutput: AnyObject {
 
 final class NoteListPresenter {
   
-  // MARK: - Internal properties
-  
-  weak var input: INoteListInput?
-  
   // MARK: - Private properties
   
   private let dataService: IDataService
+  
+  private weak var input: INoteListInput?
   
   // MARK: - Initializers
   

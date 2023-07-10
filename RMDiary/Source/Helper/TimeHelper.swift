@@ -19,8 +19,14 @@ final class TimeHelper {
   
   // MARK: - Internal functions
   
-  func formatToString(firstHour: Int, lastHour: Int) -> String {
+  func formatIntToString(firstHour: Int, lastHour: Int) -> String {
     return String(format: "%02d:%02d", firstHour)
     + "-" + String(format: "%02d:%02d", lastHour)
+  }
+  
+  func formatDateToString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+    return dateFormatter.string(from: date)
   }
 }
