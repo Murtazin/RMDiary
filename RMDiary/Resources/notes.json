@@ -31,42 +31,42 @@
     "id": 5,
     "date_start": 710678662,
     "date_finish": 710678762,
-    "name": "Домашнее задание",
-    "description": "Скала"
+    "name": "Поступить в университет",
+    "description": "ИТИС"
   },
   {
     "id": 6,
     "date_start": 710678962,
     "date_finish": 710678372,
-    "name": "Домашнее задание",
-    "description": "Скала"
+    "name": "Посмотреть фильм",
+    "description": "Выживший"
   },
   {
     "id": 7,
     "date_start": 710648362,
     "date_finish": 710658363,
-    "name": "Пополнить счет",
-    "description": "Тинькофф"
+    "name": "Поесть",
+    "description": "Еду"
   },
   {
     "id": 8,
     "date_start": 710348362,
     "date_finish": 710658363,
-    "name": "Пополнить счет",
-    "description": "Тинькофф"
+    "name": "Искупаться",
+    "description": "Холодный душ"
   },
   {
     "id": 9,
     "date_start": 710648362,
     "date_finish": 710658363,
-    "name": "Пополнить счет",
-    "description": "Тинькофф"
+    "name": "Почитать",
+    "description": "Книгу"
   },
   {
     "id": 10,
     "date_start": 710648362,
     "date_finish": 710658363,
-    "name": "Пополнить счет",
-    "description": "Тинькофф"
+    "name": "Выпить",
+    "description": "Кофе"
   },
 ]
